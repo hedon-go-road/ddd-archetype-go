@@ -1,9 +1,11 @@
 package domain
 
 import (
+	"context"
 	"time"
 
 	"github.com/hedon-go-road/ddd-archetype-go/pkg/ddd"
+	"github.com/hedon-go-road/ddd-archetype-go/pkg/log"
 )
 
 type StickyNoteID string
@@ -19,7 +21,7 @@ type StickyNote struct {
 	EntityID StickyNoteID
 	// DiaryEntityID is the ID of the diary entity.
 	DiaryEntityID DiaryID
-	// UID is the UID of the sticky note.
+	// UID is the sticky note's owner's unique id.
 	UID string
 	// Participants is the participants of the sticky note.
 	Participants []string
@@ -29,11 +31,14 @@ type StickyNote struct {
 	Content string
 }
 
+// Modify modifies the content and participants of the sticky note.
 func (s *StickyNote) Modify(content string, participants []string) {
 	s.Content = content
 	s.Participants = participants
 }
 
-func (s *StickyNote) CompleteCreate() {
-	// TODO: implement
+// CompleteCreate completes the sticky note creation.
+func (s *StickyNote) CompleteCreate(ctx context.Context) error {
+	log.Ctx(ctx).Info().Msg("complete sticky note creation")
+	return nil
 }

@@ -21,7 +21,7 @@ func (s *DiaryCommandService) CreateDiary(ctx context.Context, cmd CreateCommand
 		return CreateView{}, err
 	}
 
-	if err := diary.Create(); err != nil {
+	if err := diary.Create(ctx); err != nil {
 		return CreateView{}, err
 	}
 

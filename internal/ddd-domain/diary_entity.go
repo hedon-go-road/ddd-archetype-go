@@ -1,9 +1,11 @@
 package domain
 
 import (
+	"context"
 	"time"
 
 	"github.com/hedon-go-road/ddd-archetype-go/pkg/ddd"
+	"github.com/hedon-go-road/ddd-archetype-go/pkg/log"
 )
 
 type DiaryID string
@@ -17,7 +19,7 @@ type Diary struct {
 
 	// EntityID is the ID of the diary.
 	EntityID DiaryID
-	// UID is the UID of the diary.
+	// UID is the diary's owner's unique id.
 	UID string
 	// Date is the date of the diary.
 	Date time.Time
@@ -25,7 +27,8 @@ type Diary struct {
 	Content string
 }
 
-func (d *Diary) Create() error {
-	// TODO: implement
+// Create does the diary creation.
+func (d *Diary) Create(ctx context.Context) error {
+	log.Ctx(ctx).Info().Msg("create diary")
 	return nil
 }
