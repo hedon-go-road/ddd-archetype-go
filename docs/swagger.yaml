@@ -17,13 +17,12 @@ definitions:
   diary.Query:
     properties:
       last_id:
-        type: string
+        type: integer
       page_size:
         maximum: 100
         minimum: 1
         type: integer
     required:
-    - last_id
     - page_size
     type: object
   diary.QueryView:
@@ -34,6 +33,8 @@ definitions:
         type: string
       diary_id:
         type: string
+      id:
+        type: integer
       uid:
         type: string
     type: object

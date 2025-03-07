@@ -15,6 +15,13 @@ repos:
         language_version: 1.24.1
   - repo: local
     hooks:
+      - id: swag
+        name: swag
+        description: generate swagger docs
+        entry: zsh -c 'swag init'
+        language: golang
+        files: \.*$
+        pass_filenames: false
       - id: go-unit-test
         name: go-unit-test
         description: run go tests with race detector

@@ -303,12 +303,11 @@ const docTemplate = `{
         "diary.Query": {
             "type": "object",
             "required": [
-                "last_id",
                 "page_size"
             ],
             "properties": {
                 "last_id": {
-                    "type": "string"
+                    "type": "integer"
                 },
                 "page_size": {
                     "type": "integer",
@@ -328,6 +327,9 @@ const docTemplate = `{
                 },
                 "diary_id": {
                     "type": "string"
+                },
+                "id": {
+                    "type": "integer"
                 },
                 "uid": {
                     "type": "string"
