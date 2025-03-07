@@ -1,0 +1,55 @@
+definitions:
+  apihttp.HelloReq:
+    properties:
+      address:
+        type: string
+      age:
+        type: integer
+      married:
+        type: boolean
+      name:
+        type: string
+    type: object
+  apihttp.HelloRsp:
+    properties:
+      address:
+        type: string
+      age:
+        type: integer
+      married:
+        type: boolean
+      name:
+        type: string
+      server:
+        type: string
+    type: object
+info:
+  contact: {}
+paths:
+  /api/v1/hello:
+    post:
+      consumes:
+      - application/json
+      description: say hello to the server
+      parameters:
+      - description: Request ID
+        in: header
+        name: x-request-id
+        type: string
+      - description: Hello Api Request Body
+        in: body
+        name: HelloReq
+        required: true
+        schema:
+          $ref: '#/definitions/apihttp.HelloReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+      summary: hello
+      tags:
+      - hello service
+swagger: "2.0"

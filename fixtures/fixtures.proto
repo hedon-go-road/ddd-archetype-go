@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+option go_package = "./fixtures";
+package fixtures;
+
+message Request {
+  string name = 1;
+  int32 age = 2;
+  string address = 3;
+  bool married = 4;
+}
+
+message TestMsg {
+  int32 id = 15;
+}
