@@ -53,18 +53,8 @@ jobs:
         run: |
           go test -v -race -covermode=atomic -coverpkg=./... -coverprofile=coverage.out ./...
           go tool cover -func=coverage.out
-      - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v4.0.1
-        with:
-          files: coverage.out
-          token: ${{ secrets.CODECOV_TOKEN }}
-          flags: unittests
-          name: codecov-umbrella
-          fail_ci_if_error: false
-          continue_on_error: true
-          verbose: true
+        # run: bash ./scripts/ci/check_test_coverage.sh
       # - name: Check test coverage
-      #   run: bash ./scripts/ci/check_test_coverage.sh
       - name: Get tags info
         id: get_tag_message
         run: git fetch origin +refs/tags/*:refs/tags/*

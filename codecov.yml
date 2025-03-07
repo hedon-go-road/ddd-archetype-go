@@ -1,6 +1,0 @@
-ignore:
-  - 'cmd'
-  - 'main.go'
-  - 'docs'
-  - 'fixtures'
-  - 'examples'
