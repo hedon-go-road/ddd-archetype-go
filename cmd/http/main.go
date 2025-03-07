@@ -2,10 +2,10 @@ package main
 
 import (
 	"github.com/hedon-go-road/ddd-archetype-go/cmd"
-	apihttp "github.com/hedon-go-road/ddd-archetype-go/internal/api/httpapi"
+	launcher "github.com/hedon-go-road/ddd-archetype-go/internal/ddd-launcher"
 )
 
 func main() {
 	defer cmd.StopSafe()
-	apihttp.SetupHTTPServer()
+	launcher.SetupHTTPServer("config.yaml")
 }

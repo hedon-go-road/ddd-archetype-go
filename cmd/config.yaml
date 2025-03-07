@@ -1,0 +1,5 @@
+port: 5050
+db:
+  dsn: "root:root@tcp(localhost:33061)/ddd-archetype-go?charset=utf8mb4&parseTime=True&loc=Asia%2FShanghai"
+rdb:
+  addr: "localhost:6379"

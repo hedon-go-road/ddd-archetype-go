@@ -23,9 +23,168 @@ definitions:
       server:
         type: string
     type: object
+  diary.CreateCommand:
+    properties:
+      diary_date:
+        type: string
+      uid:
+        type: string
+    required:
+    - diary_date
+    - uid
+    type: object
+  diary.CreateView:
+    properties:
+      diary_id:
+        type: string
+    type: object
+  diary.Query:
+    properties:
+      last_id:
+        type: string
+      page_size:
+        maximum: 100
+        minimum: 1
+        type: integer
+    required:
+    - last_id
+    - page_size
+    type: object
+  diary.QueryView:
+    properties:
+      content:
+        type: string
+      diary_date_str:
+        type: string
+      diary_id:
+        type: string
+      uid:
+        type: string
+    type: object
+  stickynote.CreateCommand:
+    properties:
+      content:
+        type: string
+      diary_id:
+        type: string
+      occurrence_time_str:
+        type: string
+      participants:
+        items:
+          type: string
+        type: array
+      uid:
+        type: string
+    required:
+    - content
+    - diary_id
+    - occurrence_time_str
+    - participants
+    - uid
+    type: object
+  stickynote.CreateView:
+    properties:
+      sticky_note_id:
+        type: string
+    type: object
+  stickynote.GenerateContentCommand:
+    properties:
+      diary_id:
+        type: string
+    required:
+    - diary_id
+    type: object
+  stickynote.GenerateContentView:
+    properties:
+      generated_content:
+        type: string
+    type: object
+  stickynote.ModifyCommand:
+    properties:
+      content:
+        type: string
+      participants:
+        items:
+          type: string
+        type: array
+      sticky_note_id:
+        type: string
+    required:
+    - content
+    - participants
+    - sticky_note_id
+    type: object
 info:
   contact: {}
 paths:
+  /api/v1/diary/create:
+    post:
+      consumes:
+      - application/json
+      description: Create a diary
+      parameters:
+      - description: Request ID
+        in: header
+        name: x-request-id
+        type: string
+      - description: The command to create a diary
+        in: body
+        name: CreateCommand
+        required: true
+        schema:
+          $ref: '#/definitions/diary.CreateCommand'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/diary.CreateView'
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      summary: Create a diary
+      tags:
+      - diary service
+  /api/v1/diary/page-list:
+    post:
+      consumes:
+      - application/json
+      description: list diaries in page according to the last id and page size
+      parameters:
+      - description: Request ID
+        in: header
+        name: x-request-id
+        type: string
+      - description: The command to page list
+        in: body
+        name: Query
+        required: true
+        schema:
+          $ref: '#/definitions/diary.Query'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/diary.QueryView'
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      summary: list diaries
+      tags:
+      - diary service
   /api/v1/hello:
     post:
       consumes:
@@ -52,4 +211,106 @@ paths:
       summary: hello
       tags:
       - hello service
+  /api/v1/stickynote/create:
+    post:
+      consumes:
+      - application/json
+      description: Create a sticky note
+      parameters:
+      - description: Request ID
+        in: header
+        name: x-request-id
+        type: string
+      - description: The command to create a sticky note
+        in: body
+        name: CreateCommand
+        required: true
+        schema:
+          $ref: '#/definitions/stickynote.CreateCommand'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/stickynote.CreateView'
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      summary: Create a sticky note
+      tags:
+      - sticky note service
+  /api/v1/stickynote/generate-diary-content:
+    post:
+      consumes:
+      - application/json
+      description: Generate content for a diary
+      parameters:
+      - description: Request ID
+        in: header
+        name: x-request-id
+        type: string
+      - description: The command to generate content for a diary
+        in: body
+        name: GenerateContentCommand
+        required: true
+        schema:
+          $ref: '#/definitions/stickynote.GenerateContentCommand'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/stickynote.GenerateContentView'
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      summary: Generate content for a diary
+      tags:
+      - sticky note service
+  /api/v1/stickynote/modify:
+    post:
+      consumes:
+      - application/json
+      description: Modify a sticky note
+      parameters:
+      - description: Request ID
+        in: header
+        name: x-request-id
+        type: string
+      - description: The command to modify a sticky note
+        in: body
+        name: ModifyCommand
+        required: true
+        schema:
+          $ref: '#/definitions/stickynote.ModifyCommand'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      summary: Modify a sticky note
+      tags:
+      - sticky note service
 swagger: "2.0"
