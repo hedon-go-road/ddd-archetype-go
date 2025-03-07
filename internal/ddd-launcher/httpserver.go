@@ -17,8 +17,8 @@ import (
 	persistence "github.com/hedon-go-road/ddd-archetype-go/internal/ddd-infrastructure-persistence"
 	"github.com/hedon-go-road/ddd-archetype-go/internal/ddd-infrastructure-persistence/db"
 	web "github.com/hedon-go-road/ddd-archetype-go/internal/ddd-interface-web"
-	"github.com/hedon-go-road/ddd-archetype-go/internal/log"
-	"github.com/hedon-go-road/ddd-archetype-go/internal/middleware"
+	"github.com/hedon-go-road/ddd-archetype-go/pkg/ginx/middleware"
+	"github.com/hedon-go-road/ddd-archetype-go/pkg/log"
 )
 
 // @title           ddd-archetype-go

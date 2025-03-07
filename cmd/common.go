@@ -1,7 +1,7 @@
 package cmd
 
 import (
-	"github.com/hedon-go-road/ddd-archetype-go/internal/log"
+	"github.com/hedon-go-road/ddd-archetype-go/pkg/log"
 	"github.com/hedon-go-road/ddd-archetype-go/pkg/safe"
 )
 

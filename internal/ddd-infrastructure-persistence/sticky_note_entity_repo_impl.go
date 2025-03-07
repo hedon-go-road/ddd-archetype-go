@@ -6,7 +6,7 @@ import (
 	domain "github.com/hedon-go-road/ddd-archetype-go/internal/ddd-domain"
 	cache "github.com/hedon-go-road/ddd-archetype-go/internal/ddd-infrastructure-cache"
 	"github.com/hedon-go-road/ddd-archetype-go/internal/ddd-infrastructure-persistence/db"
-	"github.com/hedon-go-road/ddd-archetype-go/internal/log"
+	"github.com/hedon-go-road/ddd-archetype-go/pkg/log"
 )
 
 type StickyNoteEntityRepoImpl struct {
