@@ -1,0 +1,19 @@
+### create diary
+POST http://localhost:5050/api/v1/diary/create
+Content-Type: application/json
+X-REQUEST-ID: request-id
+
+{
+    "uid": "1234567890",
+    "diary_date": "2021-01-01"
+}
+
+### get diary list
+POST http://localhost:5050/api/v1/diary/pageList
+Content-Type: application/json
+X-REQUEST-ID: request-id
+
+{
+    "last_id": 0,
+    "page_size": 10
+}

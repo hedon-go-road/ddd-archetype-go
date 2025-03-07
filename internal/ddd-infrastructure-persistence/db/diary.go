@@ -17,14 +17,20 @@ type DiaryDB struct {
 }
 
 func NewDiaryDB(db *gorm.DB) *DiaryDB {
+	if !db.Migrator().HasTable(&model.Diary{}) {
+		if err := db.Migrator().CreateTable(&model.Diary{}); err != nil {
+			panic("failed to create diary table: " + err.Error())
+		}
+	}
 	return &DiaryDB{db: db}
 }
 
-func (d *DiaryDB) PageList(ctx context.Context, lastID string, pageSize int) ([]domain.Diary, error) {
+func (d *DiaryDB) PageList(ctx context.Context, lastID int64, pageSize int) ([]domain.Diary, error) {
 	var models []model.Diary
 	if err := d.db.WithContext(ctx).
 		Where("id > ?", lastID).
 		Limit(pageSize).
+		Order("id ASC").
 		Find(&models).Error; err != nil {
 		return nil, err
 	}
@@ -41,9 +47,9 @@ func (d *DiaryDB) CountForPageList(ctx context.Context) (int64, error) {
 	return count, nil
 }
 
-func (d *DiaryDB) GetByID(ctx context.Context, id domain.DiaryID) (domain.Diary, error) {
+func (d *DiaryDB) GetByEntityID(ctx context.Context, id domain.DiaryID) (domain.Diary, error) {
 	var model model.Diary
-	if err := d.db.WithContext(ctx).Where("id = ?", id).First(&model).Error; err != nil {
+	if err := d.db.WithContext(ctx).Where("entity_id = ?", id).First(&model).Error; err != nil {
 		return domain.Diary{}, err
 	}
 	return d.toEntity(&model), nil
@@ -56,7 +62,7 @@ func (d *DiaryDB) Save(ctx context.Context, entity domain.Diary) error {
 func (d *DiaryDB) toEntity(model *model.Diary) domain.Diary {
 	return domain.Diary{
 		DomainMask: model.ToMask(),
-		EntityID:   domain.DiaryID(model.ID),
+		EntityID:   domain.DiaryID(model.EntityID),
 		UID:        model.UID,
 		Date:       model.Date,
 		Content:    model.Content,
@@ -66,7 +72,7 @@ func (d *DiaryDB) toEntity(model *model.Diary) domain.Diary {
 func (d *DiaryDB) toModel(entity *domain.Diary) *model.Diary {
 	return &model.Diary{
 		DomainModel: entity.ToModel(),
-		ID:          entity.EntityID.Value(),
+		EntityID:    entity.EntityID.Value(),
 		UID:         entity.UID,
 		Date:        entity.Date,
 		Content:     entity.Content,

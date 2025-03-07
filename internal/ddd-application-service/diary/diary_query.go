@@ -33,6 +33,7 @@ func (s *DiaryQueryService) PageList(ctx context.Context, query Query) (ddd.Page
 		PageSize: len(diaryList),
 		List: lo.Map(diaryList, func(diary domain.Diary, _ int) QueryView {
 			return QueryView{
+				ID:           diary.ID,
 				DiaryID:      diary.EntityID.Value(),
 				Content:      diary.Content,
 				DiaryDateStr: diary.Date.Format(carbon.DateLayout),

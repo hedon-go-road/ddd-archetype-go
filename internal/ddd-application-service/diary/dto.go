@@ -10,11 +10,12 @@ type CreateView struct {
 }
 
 type Query struct {
-	LastID   string `json:"last_id" binding:"required"`
-	PageSize int    `json:"page_size" binding:"required,gte=1,lte=100"`
+	LastID   int64 `json:"last_id"`
+	PageSize int   `json:"page_size" binding:"required,gte=1,lte=100"`
 }
 
 type QueryView struct {
+	ID           int64  `json:"id"`
 	DiaryID      string `json:"diary_id"`
 	Content      string `json:"content"`
 	DiaryDateStr string `json:"diary_date_str"`

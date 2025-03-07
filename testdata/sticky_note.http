@@ -1,0 +1,32 @@
+### create sticky note
+POST http://localhost:5050/api/v1/stickynote/create
+Content-Type: application/json
+X-REQUEST-ID: request-id
+
+{
+    "uid": "1234567890",
+    "diary_id": "1234567890",
+    "content": "test",
+    "participants": ["1234567890"],
+    "occurrence_time_str": "2021-01-01"
+}
+
+### modify sticky note
+POST http://localhost:5050/api/v1/stickynote/modify
+Content-Type: application/json
+X-REQUEST-ID: request-id
+
+{
+    "sticky_note_id": "cc8e622f-3cd9-4880-ade7-59670f26126a",
+    "content": "this is the modified content",
+    "participants": ["1234567890"]
+}
+
+### generate content
+POST http://localhost:5050/api/v1/stickynote/generateDiaryContent
+Content-Type: application/json
+X-REQUEST-ID: request-id
+
+{
+    "diary_id": "1234567890"
+}

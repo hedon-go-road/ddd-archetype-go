@@ -8,6 +8,8 @@ const (
 
 // DomainMask is a struct that contains the metadata for a domain object.
 type DomainMask struct {
+	// ID is the auto-incremented ID from db.
+	ID int64
 	// Deleted is a flag indicating if the domain object has been deleted.
 	Deleted bool
 	// CreateBy is the user who created the domain object.
@@ -33,6 +35,7 @@ func (d *DomainMask) Init(by string, now time.Time) {
 
 func (d *DomainMask) ToModel() DomainModel {
 	return DomainModel{
+		ID:       d.ID,
 		Deleted:  d.Deleted,
 		CreateBy: d.CreateBy,
 		CreateAt: d.CreateAt,

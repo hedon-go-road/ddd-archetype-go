@@ -67,7 +67,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/api/v1/diary/page-list": {
+        "/api/v1/diary/pageList": {
             "post": {
                 "description": "list diaries in page according to the last id and page size",
                 "consumes": [
@@ -112,46 +112,6 @@ const docTemplate = `{
                     },
                     "500": {
                         "description": "Internal Server Error",
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                }
-            }
-        },
-        "/api/v1/hello": {
-            "post": {
-                "description": "say hello to the server",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "hello service"
-                ],
-                "summary": "hello",
-                "parameters": [
-                    {
-                        "type": "string",
-                        "description": "Request ID",
-                        "name": "x-request-id",
-                        "in": "header"
-                    },
-                    {
-                        "description": "Hello Api Request Body",
-                        "name": "HelloReq",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/apihttp.HelloReq"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
                         "schema": {
                             "type": "string"
                         }
@@ -211,7 +171,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/api/v1/stickynote/generate-diary-content": {
+        "/api/v1/stickynote/generateDiaryContent": {
             "post": {
                 "description": "Generate content for a diary",
                 "consumes": [
@@ -317,43 +277,6 @@ const docTemplate = `{
         }
     },
     "definitions": {
-        "apihttp.HelloReq": {
-            "type": "object",
-            "properties": {
-                "address": {
-                    "type": "string"
-                },
-                "age": {
-                    "type": "integer"
-                },
-                "married": {
-                    "type": "boolean"
-                },
-                "name": {
-                    "type": "string"
-                }
-            }
-        },
-        "apihttp.HelloRsp": {
-            "type": "object",
-            "properties": {
-                "address": {
-                    "type": "string"
-                },
-                "age": {
-                    "type": "integer"
-                },
-                "married": {
-                    "type": "boolean"
-                },
-                "name": {
-                    "type": "string"
-                },
-                "server": {
-                    "type": "string"
-                }
-            }
-        },
         "diary.CreateCommand": {
             "type": "object",
             "required": [

@@ -23,7 +23,7 @@ func (r *StickyNoteEntityRepoImpl) Load(ctx context.Context, id domain.StickyNot
 	if err == nil {
 		return entity, nil
 	}
-	entity, err = r.db.GetByID(ctx, id)
+	entity, err = r.db.GetByEntityID(ctx, id)
 	if err != nil {
 		return domain.StickyNote{}, err
 	}
